@@ -3,21 +3,37 @@ import { appointmentStore } from '../stores/AppointmentStore';
 import { observer } from 'mobx-react-lite';
 import AppointmentCard from '../components/AppointmentCard';
 import { useEffect } from 'react';
+import { Container, Title, Stack, Loader, Center, Text, Paper } from '@mantine/core';
 const PatientPage = ({ patientId }) => {
     useEffect(() => {
         appointmentStore.fetchPatientAppointments(patientId); // Replace "101" with the actual patient ID
     }, [patientId]);
     return (
-        <div className = "patient-page-container">
-            <div>
-                <h1>Patient Page</h1>{/*will be changed to patient component with patient info*/}
-            </div>
+        <Container size="sm" py="xl">
+            {/* Header Section */}
+            <Paper p="md" mb="lg" radius="md" bg="blue.0">
+                <Title order={1} size="h2" c="blue.9">
+                    Patient Dashboard
+                </Title>
+                <Text size="sm" c="blue.7" mt={4}>
+                    View and manage your upcoming schedule
+                </Text>
+            </Paper>
+
+            {/* Content Logic Block */}
             {appointmentStore.loading ? (
-                <div className = "loading-spinner">Loading...</div>
+                <Center py="xl">
+                    <Stack align="center" gap="xs">
+                        <Loader size="lg" type="dots" />
+                        <Text c="dimmed" size="sm">Loading your appointments...</Text>
+                    </Stack>
+                </Center>
             ) : (
-                <div className="appointments-list">
+                <Stack gap="md">
                     {appointmentStore.appointments.length === 0 ? (
-                        <p>No appointments found.</p>
+                        <Paper withBorder p="xl" radius="md" style={{ textAlign: 'center' }}>
+                            <Text c="dimmed">No upcoming appointments found.</Text>
+                        </Paper>
                     ) : (
                         appointmentStore.appointments.map((appointment) => (
                             <AppointmentCard 
@@ -26,9 +42,9 @@ const PatientPage = ({ patientId }) => {
                             />
                         ))
                     )}
-                </div>
+                </Stack>
             )}
-        </div>
+        </Container>
     );
 }
 export default observer(PatientPage);
