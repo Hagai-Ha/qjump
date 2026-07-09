@@ -1,6 +1,5 @@
 import { makeAutoObservable, runInAction} from "mobx";
-import  dummyAppointments  from "../pages/dummyAppointments";
-// import { supabase } from "../supabaseClient"; // Uncomment this when your supabaseClient file is ready!
+import { supabase } from "../data/supabaseClient"; // Uncomment this when your supabaseClient file is ready!
 
 class AppointmentStore {
     appointments = [];
@@ -8,26 +7,21 @@ class AppointmentStore {
     constructor() {
         makeAutoObservable(this);
     }
-    async fetchPatientAppointments(patientId) {
+    async fetchPatientAppointments(patient_id) {
         runInAction(() => {
             this.loading = true;
         });
         try{
-            //start with a set timout function that will be removed when the API is ready
-            await new Promise((resolve) => setTimeout(resolve, 500));
-            runInAction(() => {
-                this.appointments = dummyAppointments.filter(
-                    (appointment) => appointment.patientId === patientId
-                );
-            });
-            // --- LATER: Replace with your real Supabase call ---
-            /*
+            const parsedPatientId = parseInt(patient_id, 10);
             const { data, error } = await supabase
                 .from('appointments')
                 .select('*')
-                .eq('patient_id', patientId);
-            if (data) this.appointments = data;
-            */
+                .eq('patient_id', parsedPatientId);
+            
+            if(error) throw error;
+            runInAction(() => {
+                this.appointments = data || [];
+            });
         }catch(err){
             console.error("Error fetching appointments:", err);
         }finally{

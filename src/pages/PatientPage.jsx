@@ -39,7 +39,7 @@ const PatientPage = () => {
                     ) : (
                         appointmentStore.appointments.map((appointment) => (
                             <AppointmentCard 
-                                key={appointment.appointmentId} 
+                                key={appointment.appointment_id} 
                                 appointment={appointment} 
                             />
                         ))

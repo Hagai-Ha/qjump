@@ -11,7 +11,7 @@ class AppointmentCard extends Component {
                     <Stack gap="xs">
                         <Group gap="xs">
                             <Text fw={700} size="lg" c="blue.9">
-                                {appointment.doctorName}
+                                Appointment Id : {appointment.appointment_id}
                             </Text>
                             <Badge color="blue" variant="light">
                                 Confirmed
@@ -19,13 +19,13 @@ class AppointmentCard extends Component {
                         </Group>
 
                         <Text size="sm" c="dimmed">
-                            <strong>Date:</strong> {appointment.appointmentDate}
+                            <strong>Date:</strong> {appointment.date}
                         </Text>
                         <Text size="sm" c="dimmed">
-                            <strong>Time:</strong> {appointment.appointmentTime}
+                            <strong>Time:</strong> {appointment.time}
                         </Text>
                         <Text size="sm" c="dimmed">
-                            <strong>Location:</strong> {appointment.appointmentLocation}
+                            <strong>Location:</strong> {appointment.location}
                         </Text>
                     </Stack>
 
