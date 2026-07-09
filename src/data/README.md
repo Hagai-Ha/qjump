@@ -41,3 +41,13 @@ Contains the complete matrix of operational time slots across all clinical facil
 ---
 
 ## Relationship & Schema Map
+
+| USERS Table (Primary) | Relationship | APPOINTMENTS Table (Foreign) | Validation Rule |
+| :--- | :---: | :--- | :--- |
+| `patientId` (PK) | ── 1-to-Many ──► | `patientId` (FK) | Can be blank (1% unassigned) |
+| `address` | ────────────────► | `location` | Must match exactly (Same City) |
+---
+
+## Important Notice
+
+> ⚠️ **Disclaimer:** This dataset is **synthetic data meant for education and demonstration purposes only**. All names, phone numbers, email addresses, and schedule combinations are programmatically generated using random distributions. Any resemblance to real individuals, active email accounts, or actual medical records is entirely coincidental.
