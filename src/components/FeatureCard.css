@@ -1,0 +1,16 @@
+.feature-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    width: 300px;
+}
+
+.icon-box {
+    font-size: 2rem;
+    background-color: #f0f2f5;
+    padding: 10px;
+    border-radius: 8px;
+}
