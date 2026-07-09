@@ -1,20 +1,34 @@
-import appointments from './dummyAppointments.json' //will be changed to a fetch request to the backend to get the patient appointments
-export default function PatientPage() {
+import React from 'react';
+import { appointmentStore } from '../stores/AppointmentStore';
+import { observer } from 'mobx-react-lite';
+import AppointmentCard from '../components/AppointmentCard';
+import { useEffect } from 'react';
+const PatientPage = ({ patientId }) => {
+    useEffect(() => {
+        appointmentStore.fetchPatientAppointments(patientId); // Replace "101" with the actual patient ID
+    }, [patientId]);
     return (
-        <>
+        <div className = "patient-page-container">
             <div>
                 <h1>Patient Page</h1>{/*will be changed to patient component with patient info*/}
             </div>
-            <div className="appointments-list">
-                {/* list with the patiant appointments*/}
-                <ul>
-                    {appointments.map((appointment) => (
-                        <li key={appointment.appointmentId}>
-                            {appointment.doctorName} - {appointment.appointmentDate} at {appointment.appointmentTime} located in{appointment.appointmentLocation}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </>
-    )
+            {appointmentStore.loading ? (
+                <div className = "loading-spinner">Loading...</div>
+            ) : (
+                <div className="appointments-list">
+                    {appointmentStore.appointments.length === 0 ? (
+                        <p>No appointments found.</p>
+                    ) : (
+                        appointmentStore.appointments.map((appointment) => (
+                            <AppointmentCard 
+                                key={appointment.appointmentId} 
+                                appointment={appointment} 
+                            />
+                        ))
+                    )}
+                </div>
+            )}
+        </div>
+    );
 }
+export default observer(PatientPage);

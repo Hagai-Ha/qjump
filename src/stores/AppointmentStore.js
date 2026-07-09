@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { dummyAppointments } from "../pages/dummyAppointments";
+import  dummyAppointments  from "../pages/dummyAppointments";
 // import { supabase } from "../supabaseClient"; // Uncomment this when your supabaseClient file is ready!
 
 class AppointmentStore {
@@ -13,7 +13,9 @@ class AppointmentStore {
         try{
             //start with a set timout function that will be removed when the API is ready
             await new Promise((resolve) => setTimeout(resolve, 500));
-            this.appointments =[...dummyAppointments];
+            this.appointments = dummyAppointments.filter(
+                (app) => app.patientId === patientId
+            );
             // --- LATER: Replace with your real Supabase call ---
             /*
             const { data, error } = await supabase
