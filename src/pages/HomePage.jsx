@@ -3,9 +3,7 @@ import "./HomePage.css";
 
 function Homepage() {
     
-
   return (
-
    // homepage main div
     <div className="homepage">
         {/* top navbar */}
