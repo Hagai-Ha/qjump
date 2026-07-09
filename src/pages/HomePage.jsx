@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 import "./HomePage.css";
 
 function Homepage() {
+
+    
   return (
     <div className="homepage">
       <Navbar />
