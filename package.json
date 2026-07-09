@@ -12,6 +12,8 @@
   "dependencies": {
     "@mantine/core": "^9.4.1",
     "@mantine/hooks": "^9.4.1",
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.110.2",
     "mobx": "^6.16.1",
     "mobx-react": "^9.2.2",
     "mobx-react-lite": "^4.1.1",
