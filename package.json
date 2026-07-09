@@ -10,8 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^9.4.1",
+    "@mantine/hooks": "^9.4.1",
+    "mobx": "^6.16.1",
+    "mobx-react": "^9.2.2",
+    "mobx-react-lite": "^4.1.1",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",

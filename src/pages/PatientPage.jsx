@@ -3,10 +3,12 @@ import { appointmentStore } from '../stores/AppointmentStore';
 import { observer } from 'mobx-react-lite';
 import AppointmentCard from '../components/AppointmentCard';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Container, Title, Stack, Loader, Center, Text, Paper } from '@mantine/core';
-const PatientPage = ({ patientId }) => {
+const PatientPage = () => {
+    const { patientId } = useParams();
     useEffect(() => {
-        appointmentStore.fetchPatientAppointments(patientId); // Replace "101" with the actual patient ID
+        appointmentStore.fetchPatientAppointments(patientId); 
     }, [patientId]);
     return (
         <Container size="sm" py="xl">
@@ -20,7 +22,7 @@ const PatientPage = ({ patientId }) => {
                 </Text>
             </Paper>
 
-            {/* Content Logic Block */}
+            {/* Read the global loading state directly from MobX */}
             {appointmentStore.loading ? (
                 <Center py="xl">
                     <Stack align="center" gap="xs">

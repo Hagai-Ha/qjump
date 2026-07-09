@@ -1,0 +1,14 @@
+.hero {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.hero__title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero__description {
+    color: #666;
+    line-height: 1.6;
+}

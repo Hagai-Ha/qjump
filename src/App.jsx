@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import './App.css'
-import '@mantine/core/styles.css'; // Always import styles before your custom application files
-import { MantineProvider } from '@mantine/core';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PatientPage from './pages/PatientPage'
-// import HomePage from './pages/HomePage'
+import HomePage from './pages/HomePage';
+import '@mantine/core/styles.css'; // Import Mantine styles
+import { MantineProvider } from '@mantine/core';
 function App() {
 
   return (
@@ -12,12 +10,13 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            {/* <Route path="/" element={<HomePage />} /> */}
-            <Route path="/" element={<PatientPage patientId="101"/>} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/patient/:patientId" element={<PatientPage />} />
           </Routes>
         </div>
       </Router>
     </MantineProvider>
+
   )
 }
 
