@@ -3,8 +3,10 @@ import { appointmentStore } from '../stores/AppointmentStore';
 import { observer } from 'mobx-react-lite';
 import AppointmentCard from '../components/AppointmentCard';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Container, Title, Stack, Loader, Center, Text, Paper } from '@mantine/core';
-const PatientPage = ({ patientId }) => {
+const PatientPage = () => {
+    const { patientId } = useParams();
     useEffect(() => {
         appointmentStore.fetchPatientAppointments(patientId); 
     }, [patientId]);
