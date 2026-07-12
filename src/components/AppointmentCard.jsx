@@ -1,5 +1,6 @@
 import { observer, inject } from 'mobx-react'
 import {Component} from 'react'
+import {appointmnetStore} from '../stores/AppointmentStore'
 import { Card, Text, Button, Group, Stack, Badge } from '@mantine/core';
 class AppointmentCard extends Component {
     render() {
@@ -44,6 +45,7 @@ class AppointmentCard extends Component {
                             variant="light" 
                             color="gray" 
                             fullWidth
+                            onClick={() => {appointmentStore.openPostponeModal(appointment)}}
                         >
                             ⏳ Postpone (Later)
                         </Button>
