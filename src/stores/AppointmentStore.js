@@ -83,5 +83,44 @@ class AppointmentStore {
             });
         }
     }
+    async submitPrecedeRequest(startDate, endDate) {
+        if (!this.selectedAppointmentForPrecede) return;
+
+        runInAction(() => {
+            this.loading = true;
+        });
+
+        try {
+            const appointment = this.selectedAppointmentForPrecede;
+
+            const { error } = await supabase
+                .from('precede_requests')
+                .insert([
+                    {
+                        appointment_id: appointment.appointment_id,
+                        start_date: startDate,
+                        end_date: endDate,
+                        locations: appointment.location,
+                        user_id: appointment.user_id,
+                    }
+                ]);
+
+            if (error) throw error;
+
+            alert("Precede request submitted successfully!");
+            
+            // Close the modal upon success
+            runInAction(() => {
+                this.closePrecedeModal();
+            });
+        } catch (err) {
+            console.error("Error inserting precede request:", err);
+            alert("Failed to submit precede request.");
+        } finally {
+            runInAction(() => {
+                this.loading = false;
+            });
+        }
+    }
 }
 export const appointmentStore = new AppointmentStore();

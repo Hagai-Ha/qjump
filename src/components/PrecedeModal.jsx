@@ -32,7 +32,7 @@ const PrecedeModal = () => {
         }
     };
 
-    const handleValidation = (e) => {
+    const handleValidation = async(e) => {
         e.preventDefault();
         setError('');
 
@@ -58,7 +58,7 @@ const PrecedeModal = () => {
             return;
         }
 
-        alert('Validation passed successfully! Chosen dates: ' + startDate + ' to ' + endDate);
+        await appointmentStore.submitPrecedeRequest(startDate, endDate);
     };
 
     return (
