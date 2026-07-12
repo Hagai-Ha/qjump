@@ -3,6 +3,8 @@ import {Component} from 'react'
 import { Card, Text, Button, Group, Stack, Badge } from '@mantine/core';
 class AppointmentCard extends Component {
     render() {
+        const dateWithSlash = this.props.appointment.date.replace(/-/g, '/');
+        const timeWithoutSeconds = this.props.appointment.time.split(':').slice(0, 2).join(':');
         const { appointment } = this.props;
         return (
             <Card shadow="sm" padding="lg" radius="md" withBorder style={{ width: '100%' }}>
@@ -19,10 +21,10 @@ class AppointmentCard extends Component {
                         </Group>
 
                         <Text size="sm" c="dimmed">
-                            <strong>Date:</strong> {appointment.date}
+                            <strong>Date:</strong> {dateWithSlash}
                         </Text>
                         <Text size="sm" c="dimmed">
-                            <strong>Time:</strong> {appointment.time}
+                            <strong>Time:</strong> {timeWithoutSeconds}
                         </Text>
                         <Text size="sm" c="dimmed">
                             <strong>Location:</strong> {appointment.location}
