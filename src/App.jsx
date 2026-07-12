@@ -5,6 +5,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Clinics from "./pages/Clinics";
 import Resources from "./pages/Resources";
 import Support from "./pages/Support";
+import NotFound from "./pages/NotFound";
 import '@mantine/core/styles.css'; // Import Mantine styles
 import { MantineProvider } from '@mantine/core';
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/clinics" element={<Clinics />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/support" element={<Support />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>
