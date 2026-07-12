@@ -31,7 +31,7 @@ const PostponeModal = () => {
         }
     };
 
-    const handleValidation = (e) => {
+    const handleValidation = async (e) => {
         e.preventDefault();
         setError('');
 
@@ -57,7 +57,7 @@ const PostponeModal = () => {
             return;
         }
 
-        alert('Validation passed successfully! Chosen dates: ' + startDate + ' to ' + endDate);
+       await appointmentStore.submitPostponeRequest(startDate, endDate);
     };
 
     return (

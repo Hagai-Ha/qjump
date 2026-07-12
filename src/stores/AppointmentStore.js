@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction} from "mobx";
-import { supabase } from "../data/supabaseClient"; // Uncomment this when your supabaseClient file is ready!
+import { supabase } from "../data/supabaseClient";
 
 class AppointmentStore {
     appointments = [];
@@ -44,7 +44,44 @@ class AppointmentStore {
             });
         }
     }
+    async submitPostponeRequest(startDate, endDate) {
+        if (!this.selectedAppointmentForPostpone) return;
 
-    
+        runInAction(() => {
+            this.loading = true;
+        });
+
+        try {
+            const appointment = this.selectedAppointmentForPostpone;
+
+            const { error } = await supabase
+                .from('postpone_requests')
+                .insert([
+                    {
+                        appointment_id: appointment.appointment_id,
+                        start_date: startDate,
+                        end_date: endDate,
+                        locations: appointment.location,
+                        user_id: appointment.user_id,
+                    }
+                ]);
+
+            if (error) throw error;
+
+            alert("Postpone request submitted successfully!");
+            
+            // Close the modal upon success
+            runInAction(() => {
+                this.closePostponeModal();
+            });
+        } catch (err) {
+            console.error("Error inserting postpone request:", err);
+            alert("Failed to submit postpone request.");
+        } finally {
+            runInAction(() => {
+                this.loading = false;
+            });
+        }
+    }
 }
 export const appointmentStore = new AppointmentStore();
