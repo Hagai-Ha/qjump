@@ -3,6 +3,7 @@ import { appointmentStore } from '../stores/AppointmentStore';
 import { observer } from 'mobx-react-lite';
 import AppointmentCard from '../components/AppointmentCard';
 import { useEffect } from 'react';
+import Navbar from "../components/Navbar";
 import { useParams } from 'react-router-dom';
 import { Container, Title, Stack, Loader, Center, Text, Paper } from '@mantine/core';
 const PatientPage = () => {
@@ -12,6 +13,7 @@ const PatientPage = () => {
     }, [patientId]);
     return (
         <Container size="sm" py="xl">
+            <Navbar />
             {/* Header Section */}
             <Paper p="md" mb="lg" radius="md" bg="blue.0">
                 <Title order={1} size="h2" c="blue.9">
