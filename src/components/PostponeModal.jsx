@@ -48,7 +48,7 @@ const PostponeModal = () => {
             setError('Start date cannot be earlier than the current appointment date.');
             return;
         }
-        if (end <= appointmentDate) {
+        if (end < appointmentDate) {
             setError('Last date must be strictly after the appointment date.');
             return;
         }

@@ -49,7 +49,7 @@ const PrecedeModal = () => {
             setError('Start date cannot be earlier than todays date.');
             return;
         }
-        if (end >= appointmentDate) {
+        if (end > appointmentDate) {
             setError('Last date must be strictly before the appointment date.');
             return;
         }
