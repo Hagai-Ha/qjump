@@ -1,6 +1,6 @@
 import { observer, inject } from 'mobx-react'
 import {Component} from 'react'
-import {appointmnetStore} from '../stores/AppointmentStore'
+import {appointmentStore} from '../stores/AppointmentStore'
 import { Card, Text, Button, Group, Stack, Badge } from '@mantine/core';
 class AppointmentCard extends Component {
     render() {

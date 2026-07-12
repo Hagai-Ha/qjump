@@ -2,6 +2,7 @@ import React from 'react';
 import { appointmentStore } from '../stores/AppointmentStore';
 import { observer } from 'mobx-react-lite';
 import AppointmentCard from '../components/AppointmentCard';
+import PostponeModal from '../components/PostponeModal';
 import { useEffect } from 'react';
 import Navbar from "../components/Navbar";
 import { useParams } from 'react-router-dom';
@@ -48,6 +49,7 @@ const PatientPage = () => {
                     )}
                 </Stack>
             )}
+            <PostponeModal />
         </Container>
     );
 }
