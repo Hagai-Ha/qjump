@@ -10,11 +10,58 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    width: 100%;
+    padding: 16px;
 }
 
 .features-container {
     display: flex;
-    gap: 30px;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+@media (min-width: 768px) {
+    .homepage {
+        padding: 20px;
+    }
+
+    .features-container {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    html, body, #root {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .homepage {
+        height: 100vh;
+        justify-content: flex-start;
+        gap: 2vh;
+        padding: 0 40px;
+    }
+
+    .homepage > .hero {
+        margin-top: 1.5vh;
+    }
+
+    .features-container {
+        margin-top: 0;
+        gap: 48px;
+    }
+
+    .homepage > .footer-legal {
+        margin-top: auto;
+        margin-bottom: 1vh;
+    }
 }

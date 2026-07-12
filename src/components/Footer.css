@@ -1,5 +1,20 @@
 .footer-legal {
-    padding: 40px;
+    padding: 24px 16px;
     color: #aaa;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .footer-legal {
+        padding: 40px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-legal {
+        padding: 10px;
+        font-size: 0.75rem;
+    }
 }
