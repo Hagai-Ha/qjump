@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom"; 
 import { supabase } from "../data/supabaseClient";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,10 +24,10 @@ function Navbar() {
         <span></span>
       </button>
       <div className={`nav-links ${isMenuOpen ? "nav-links--open" : ""}`}>
-        <span>How it Works</span>
-        <span>Clinics</span>
-        <span>Resources</span>
-        <span>Support</span>
+        <Link to="/how-it-works" onClick={() => setIsMenuOpen(false)}>How it Works</Link>
+        <Link to="/clinics" onClick={() => setIsMenuOpen(false)}>Clinics</Link>
+        <Link to="/resources" onClick={() => setIsMenuOpen(false)}>Resources</Link>
+        <Link to="/support" onClick={() => setIsMenuOpen(false)}>Support</Link>
         {/* add a logout button with handle logout functionality */}
         {window.location.pathname !== "/" && (
           <button className="logout-button" onClick={() => {
