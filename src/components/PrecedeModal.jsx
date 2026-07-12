@@ -3,14 +3,15 @@ import { observer } from 'mobx-react-lite';
 import { Modal, Button, Group, Stack, TextInput, Text } from '@mantine/core';
 import { appointmentStore } from '../stores/AppointmentStore';
 
-const PostponeModal = () => {
-    const appointment = appointmentStore.selectedAppointmentForPostpone;
+const PrecedeModal = () => {
+    const appointment = appointmentStore.selectedAppointmentForPrecede;
 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [error, setError] = useState('');
 
     if (!appointment) return null;
+    const todayStr = new Date().toISOString().split('T')[0];
     const handleStartDateChange = (e) => {
         const value = e.target.value;
         setStartDate(value);
@@ -44,12 +45,12 @@ const PostponeModal = () => {
         const start = new Date(startDate);
         const end = new Date(endDate);
 
-        if (start < appointmentDate) {
-            setError('Start date cannot be earlier than the current appointment date.');
+        if (start < Date.now()) {
+            setError('Start date cannot be earlier than todays date.');
             return;
         }
-        if (end <= appointmentDate) {
-            setError('Last date must be strictly after the appointment date.');
+        if (end >= appointmentDate) {
+            setError('Last date must be strictly before the appointment date.');
             return;
         }
         if (start >= end) {
@@ -63,8 +64,8 @@ const PostponeModal = () => {
     return (
         <Modal
             opened={!!appointment}
-            onClose={() => appointmentStore.closePostponeModal()}
-            title={`Postpone Appointment #${appointment.appointment_id}`}
+            onClose={() => appointmentStore.closePrecedeModal()}
+            title={`Precede Appointment #${appointment.appointment_id}`}
             centered
         >
             <form onSubmit={handleValidation}>
@@ -74,19 +75,21 @@ const PostponeModal = () => {
                     </Text>
 
                     <TextInput
-                        label="Postpone From (Start Date)"
+                        label="Precede From (Start Date)"
                         type="date"
-                        min={appointment.date}
+                        min={todayStr}
+                        max={appointment.date}
                         value={startDate}
                         onChange={handleStartDateChange} // Clean function reference
                         required
                     />
 
                     <TextInput
-                        label="Postpone Until (Last Date)"
+                        label="Precede Until (Last Date)"
                         type="date"
                         // Smarter functionality: min date is dynamically restricted by the chosen startDate
-                        min={startDate || appointment.date} 
+                        min={startDate || todayStr}
+                        max={appointment.date}
                         value={endDate}
                         onChange={handleEndDateChange} // Clean function reference
                         required
@@ -99,7 +102,7 @@ const PostponeModal = () => {
                     )}
 
                     <Group justify="flex-end" mt="md">
-                        <Button variant="subtle" color="gray" onClick={() => appointmentStore.closePostponeModal()}>
+                        <Button variant="subtle" color="gray" onClick={() => appointmentStore.closePrecedeModal()}>
                             Cancel
                         </Button>
                         <Button type="submit" color="blue">
@@ -112,4 +115,4 @@ const PostponeModal = () => {
     );
 };
 
-export default observer(PostponeModal);
+export default observer(PrecedeModal);

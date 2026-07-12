@@ -38,6 +38,7 @@ class AppointmentCard extends Component {
                             variant="light" 
                             color="blue" 
                             fullWidth
+                            onClick={() => {appointmentStore.openPrecedeModal(appointment)}}
                         >
                             ⏰ Precede (Earlier)
                         </Button>

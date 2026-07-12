@@ -5,6 +5,7 @@ class AppointmentStore {
     appointments = [];
     loading = false;
     selectedAppointmentForPostpone = null;
+    selectedAppointmentForPrecede = null;
     constructor() {
         makeAutoObservable(this);
     }
@@ -13,6 +14,12 @@ class AppointmentStore {
     }
     closePostponeModal() {
         this.selectedAppointmentForPostpone = null;
+    }
+    openPrecedeModal(appointment) {
+        this.selectedAppointmentForPrecede = appointment;
+    }
+    closePrecedeModal() {
+        this.selectedAppointmentForPrecede = null;
     }
     async fetchPatientAppointments(patient_id) {
         runInAction(() => {

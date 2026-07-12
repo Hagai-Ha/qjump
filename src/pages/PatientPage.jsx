@@ -3,6 +3,7 @@ import { appointmentStore } from '../stores/AppointmentStore';
 import { observer } from 'mobx-react-lite';
 import AppointmentCard from '../components/AppointmentCard';
 import PostponeModal from '../components/PostponeModal';
+import PrecedeModal from '../components/PrecedeModal';
 import { useEffect } from 'react';
 import Navbar from "../components/Navbar";
 import { useParams } from 'react-router-dom';
@@ -50,6 +51,7 @@ const PatientPage = () => {
                 </Stack>
             )}
             <PostponeModal />
+            <PrecedeModal />
         </Container>
     );
 }
