@@ -4,8 +4,15 @@ import { supabase } from "../data/supabaseClient"; // Uncomment this when your s
 class AppointmentStore {
     appointments = [];
     loading = false;
+    selectedAppointmentForPostpone = null;
     constructor() {
         makeAutoObservable(this);
+    }
+    openPostponeModal(appointment) {
+        this.selectedAppointmentForPostpone = appointment;
+    }
+    closePostponeModal() {
+        this.selectedAppointmentForPostpone = null;
     }
     async fetchPatientAppointments(patient_id) {
         runInAction(() => {
