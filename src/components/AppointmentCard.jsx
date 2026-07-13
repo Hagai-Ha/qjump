@@ -4,8 +4,14 @@ import {appointmentStore} from '../stores/AppointmentStore'
 import { Card, Text, Button, Group, Stack, Badge, Flex} from '@mantine/core';
 class AppointmentCard extends Component {
     render() {
+        //add date with slashes and revert it to be dd/mm/yyyy
         const dateWithSlash = this.props.appointment.date.replace(/-/g, '/');
+        const [year, month, day] = dateWithSlash.split('/');
+        //add a calander emoji
+        const formattedDate = `📅 ${day}/${month}/${year}`
         const timeWithoutSeconds = this.props.appointment.time.split(':').slice(0, 2).join(':');
+        //add a clock emoji to the time
+        const formattedTime = `⏰ ${timeWithoutSeconds}`;
         const { appointment } = this.props;
         return (
             <Card shadow="sm" padding="lg" radius="md" withBorder style={{ width: '100%' }}>
@@ -17,7 +23,7 @@ class AppointmentCard extends Component {
                 >
                     <Stack gap="xs">
                         <Group gap="xs">
-                            <Text fw={700} size="lg" c="blue.9">
+                            <Text fw={700} size="lg" c="Black">
                                 Clinic: {appointment.clinician}
                             </Text>
                             <Badge color="blue" variant="light">
@@ -25,14 +31,14 @@ class AppointmentCard extends Component {
                             </Badge>
                         </Group>
 
-                        <Text size="sm" c="dimmed">
-                            <strong>Date:</strong> {dateWithSlash}
+                        <Text size="sm" c="Black">
+                            <strong>Date:</strong> {formattedDate}
                         </Text>
-                        <Text size="sm" c="dimmed">
-                            <strong>Time:</strong> {timeWithoutSeconds}
+                        <Text size="sm" c="Black">
+                            <strong>Time:</strong> {formattedTime}
                         </Text>
-                        <Text size="sm" c="dimmed">
-                            <strong>Location:</strong> {appointment.location}
+                        <Text size="sm" c="Black">
+                            <strong>Location:</strong> {`📍 ${appointment.location}`}
                         </Text>
                     </Stack>
 
