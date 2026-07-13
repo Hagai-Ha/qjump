@@ -1,7 +1,7 @@
 import { observer, inject } from 'mobx-react'
 import {Component} from 'react'
 import {appointmentStore} from '../stores/AppointmentStore'
-import { Card, Text, Button, Group, Stack, Badge } from '@mantine/core';
+import { Card, Text, Button, Group, Stack, Badge, Flex} from '@mantine/core';
 class AppointmentCard extends Component {
     render() {
         const dateWithSlash = this.props.appointment.date.replace(/-/g, '/');
@@ -9,8 +9,12 @@ class AppointmentCard extends Component {
         const { appointment } = this.props;
         return (
             <Card shadow="sm" padding="lg" radius="md" withBorder style={{ width: '100%' }}>
-                <Group justify="space-between" align="flex-start" wrap="nowrap">
-                    {/* Appointment Details Section */}
+                <Flex
+                    direction={{ base: 'column', sm: 'row' }}
+                    justify="space-between"
+                    align={{ base: 'stretch', sm: 'flex-start' }}
+                    gap="md"
+                >
                     <Stack gap="xs">
                         <Group gap="xs">
                             <Text fw={700} size="lg" c="blue.9">
@@ -33,7 +37,11 @@ class AppointmentCard extends Component {
                     </Stack>
 
                     {/* Action Buttons Section */}
-                    <Stack gap="xs" style={{ minWidth: '160px' }}>
+                    <Flex 
+                        direction={{ base: 'row', sm: 'column' }} 
+                        gap="xs" 
+                        style={{ minWidth: '160px' }}
+                    >
                         <Button 
                             variant="light" 
                             color="blue" 
@@ -50,8 +58,8 @@ class AppointmentCard extends Component {
                         >
                             ⏳ Postpone (Later)
                         </Button>
-                    </Stack>
-                </Group>
+                    </Flex>
+                </Flex>
             </Card>
         );
     }
