@@ -17,8 +17,6 @@ const RequestsPage = () => {
   }, [patientId]);
   return (
     <div className="page">
-      {/* <Navbar /> */}
-
       <Container size="sm" py="xl">
           {/* Header Section */}
           <Paper p="md" mb="lg" radius="md" bg="blue.0">
@@ -58,8 +56,6 @@ const RequestsPage = () => {
           )}
 
       </Container>
-
-      <Footer />
     </div>
   );
 }
