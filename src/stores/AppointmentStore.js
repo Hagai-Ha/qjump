@@ -63,6 +63,7 @@ class AppointmentStore {
                         end_date: endDate,
                         locations: appointment.location,
                         user_id: appointment.user_id,
+                        patient_id: appointment.patient_id
                     }
                 ]);
 
@@ -102,6 +103,7 @@ class AppointmentStore {
                         end_date: endDate,
                         locations: appointment.location,
                         user_id: appointment.user_id,
+                        patient_id: appointment.patient_id
                     }
                 ]);
 
