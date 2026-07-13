@@ -41,7 +41,8 @@ function Navbar() {
   }
 
   const isHome = location.pathname === "/";
-  const isPatientPage = location.pathname.startsWith("/patient/");
+  const isPatientPage = /^\/patient\/\d+$/.test(location.pathname);
+  const isRequestsPage = /^\/patient\/\d+\/requests$/.test(location.pathname);
 
   return (
     <nav className="navbar">
@@ -57,6 +58,18 @@ function Navbar() {
         <span></span>
       </button>
       <div className={`nav-links ${isMenuOpen ? "nav-links--open" : ""}`}>
+        
+        {/* My requests button */}
+        {isPatientPage && isAuthenticated && patientId && (
+        <Link
+          to={`/patient/${patientId}/requests`}
+          className="back-button"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          My Requests
+        </Link>
+        )}
+
         <Link to="/how-it-works" onClick={() => setIsMenuOpen(false)}>How it Works</Link>
         <Link to="/clinics" onClick={() => setIsMenuOpen(false)}>Clinics</Link>
         <Link to="/resources" onClick={() => setIsMenuOpen(false)}>Resources</Link>
