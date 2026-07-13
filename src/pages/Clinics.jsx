@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { Container, Title, Text, Stack, Paper, Group, ThemeIcon, Badge } from "@mantine/core";
 
 const clinics = [
@@ -26,9 +24,7 @@ const clinics = [
 
 function Clinics() {
   return (
-    <div className="page">
-      <Navbar />
-      <Container size="sm" py="xl">
+    <Container size="sm" py="xl">
         <Title order={1} ta="center" mb="xs">
           Clinics
         </Title>
@@ -64,9 +60,7 @@ function Clinics() {
             </Paper>
           ))}
         </Stack>
-      </Container>
-      <Footer />
-    </div>
+    </Container>
   );
 }
 

@@ -1,8 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
-import { authStore } from "../stores/AuthStore"; 
-import "./LoginForm.css"; 
+import { Loader } from "@mantine/core";
+import { authStore } from "../stores/AuthStore";
+import "./LoginForm.css";
 
 const LoginForm = observer(() => { 
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const LoginForm = observer(() => {
     e.preventDefault();
     const patientId = await authStore.login();
     if (patientId) {
+      localStorage.setItem("qjump_patientId", patientId);
       navigate(`/patient/${patientId}`);
     }
   };
@@ -33,7 +35,14 @@ const LoginForm = observer(() => {
         required
       />
       <button className="login-section__button" disabled={authStore.loading}>
-        {authStore.loading ? "Login..." : "Log In with HMO"}
+        {authStore.loading ? (
+          <>
+            <Loader size="sm" type="dots" color="white" />
+            Logging in...
+          </>
+        ) : (
+          "Log In with HMO"
+        )}
       </button>
     </form>
   );
