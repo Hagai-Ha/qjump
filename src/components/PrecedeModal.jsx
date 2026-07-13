@@ -102,7 +102,12 @@ const PrecedeModal = () => {
                     )}
 
                     <Group justify="flex-end" mt="md">
-                        <Button variant="subtle" color="gray" onClick={() => appointmentStore.closePrecedeModal()}>
+                        <Button variant="subtle" color="gray" onClick={() => {
+                            setStartDate('');
+                            setEndDate('');
+                            appointmentStore.closePrecedeModal();
+                        }}
+                        >
                             Cancel
                         </Button>
                         <Button type="submit" color="blue">
