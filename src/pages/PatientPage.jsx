@@ -17,7 +17,7 @@ const PatientPage = () => {
             {/* Header Section */}
             <Paper p="md" mb="lg" radius="md" bg="blue.0">
                 <Title order={1} size="h2" c="blue.9">
-                    Patient Dashboard
+                    Hello {appointmentStore.patient_name}!
                 </Title>
                 <Text size="sm" c="blue.7" mt={4}>
                     View and manage your upcoming schedule

@@ -4,6 +4,7 @@ import { supabase } from "../data/supabaseClient";
 class AppointmentStore {
     appointments = [];
     loading = false;
+    patient_name = [];
     selectedAppointmentForPostpone = null;
     selectedAppointmentForPrecede = null;
     constructor() {
@@ -27,6 +28,12 @@ class AppointmentStore {
         });
         try{
             const parsedPatientId = parseInt(patient_id, 10);
+
+            const { data: userData, error: userError } = await supabase
+                .from('patients') // Double-check table casing in your Supabase UI (e.g., 'Users' or 'users')
+                .select('first_name, last_name')
+                .eq('patient_id', parsedPatientId) // assuming 'id' matches your parsedPatientId
+                .single(); // we only expect one row back
             const { data, error } = await supabase
                 .from('appointments')
                 .select('*')
@@ -34,6 +41,7 @@ class AppointmentStore {
             
             if(error) throw error;
             runInAction(() => {
+                this.patient_name = userData ? `${userData.first_name} ${userData.last_name}` : '';
                 this.appointments = data || [];
             });
         }catch(err){

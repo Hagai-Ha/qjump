@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "../data/supabaseClient";
-
+import { appointmentStore } from "../stores/AppointmentStore";
 function hasPersistedSession() {
   return Object.keys(localStorage).some(
     (key) => key.startsWith("sb-") && key.endsWith("-auth-token")
@@ -50,6 +50,7 @@ function Navbar() {
   async function handleLogout() {
     await supabase.auth.signOut();
     localStorage.removeItem("qjump_patientId");
+    appointmentStore.patient_name = '';
     setIsMenuOpen(false);
     navigate("/");
   }
