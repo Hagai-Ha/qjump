@@ -48,7 +48,7 @@ class PostponeRequestsStore {
                 this.requests = this.requests.filter(req => req.request_id !== request_id);
             });
             
-            console.log(`Successfully deleted request #${request_id}`);
+            console.log(`Successfully deleted postpone request #${request_id}`);
         } catch (err) {
             console.error("Error deleting postpone request:", err);
         }
