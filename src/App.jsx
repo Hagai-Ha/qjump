@@ -15,7 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <MantineProvider>
-      <Router>
+      <Router basename="/qjump">
         <div className="App">
           <Routes>
             <Route element={<Layout />}>
