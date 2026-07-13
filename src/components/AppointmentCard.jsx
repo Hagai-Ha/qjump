@@ -14,7 +14,7 @@ class AppointmentCard extends Component {
                     <Stack gap="xs">
                         <Group gap="xs">
                             <Text fw={700} size="lg" c="blue.9">
-                                Appointment Id : {appointment.appointment_id}
+                                Clinic: {appointment.clinician}
                             </Text>
                             <Badge color="blue" variant="light">
                                 Confirmed
