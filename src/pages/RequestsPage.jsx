@@ -17,7 +17,7 @@ const RequestsPage = () => {
   }, [patientId]);
   return (
     <div className="page">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <Container size="sm" py="xl">
           {/* Header Section */}
