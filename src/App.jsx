@@ -9,6 +9,7 @@ import Support from "./pages/Support";
 import NotFound from "./pages/NotFound";
 import '@mantine/core/styles.css'; // Import Mantine styles
 import { MantineProvider } from '@mantine/core';
+import ProtectedRoute from './components/ProtectedRoute';
 function App() {
 
   return (
@@ -17,13 +18,23 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/patient/:patientId" element={<PatientPage />} />
-            <Route path="/patient/:patientId/requests" element={<RequestsPage />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/clinics" element={<Clinics />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/support" element={<Support />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/patient/:patientId" 
+              element={
+              <ProtectedRoute>
+                <PatientPage />
+              </ProtectedRoute>
+              } />
+            <Route path="/patient/:patientId/requests" 
+              element={
+              <ProtectedRoute>
+                <RequestsPage />
+              </ProtectedRoute>
+              } />
           </Routes>
         </div>
       </Router>
