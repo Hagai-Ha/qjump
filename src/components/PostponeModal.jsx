@@ -99,7 +99,12 @@ const PostponeModal = () => {
                     )}
 
                     <Group justify="flex-end" mt="md">
-                        <Button variant="subtle" color="gray" onClick={() => appointmentStore.closePostponeModal()}>
+                        <Button variant="subtle" color="gray" onClick={() => {
+                            setStartDate('');
+                            setEndDate('');
+                            appointmentStore.closePostponeModal();
+                        }}
+                        >
                             Cancel
                         </Button>
                         <Button type="submit" color="blue">
