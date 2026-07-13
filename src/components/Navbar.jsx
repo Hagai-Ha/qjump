@@ -3,10 +3,18 @@ import "./Navbar.css";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "../data/supabaseClient";
 
+function hasPersistedSession() {
+  return Object.keys(localStorage).some(
+    (key) => key.startsWith("sb-") && key.endsWith("-auth-token")
+  );
+}
+
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [patientId, setPatientId] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(hasPersistedSession);
+  const [patientId, setPatientId] = useState(
+    () => localStorage.getItem("qjump_patientId")
+  );
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,6 +23,7 @@ function Navbar() {
       setIsAuthenticated(!!session);
       if (!session) {
         setPatientId(null);
+        localStorage.removeItem("qjump_patientId");
         return;
       }
       const { data: userData } = await supabase
@@ -22,7 +31,11 @@ function Navbar() {
         .select("patient_id")
         .eq("user_id", session.user.id)
         .single();
-      setPatientId(userData?.patient_id ?? null);
+      const id = userData?.patient_id ?? null;
+      setPatientId(id);
+      if (id) {
+        localStorage.setItem("qjump_patientId", id);
+      }
     }
 
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -36,6 +49,7 @@ function Navbar() {
 
   async function handleLogout() {
     await supabase.auth.signOut();
+    localStorage.removeItem("qjump_patientId");
     setIsMenuOpen(false);
     navigate("/");
   }
@@ -43,6 +57,9 @@ function Navbar() {
   const isHome = location.pathname === "/";
   const isPatientPage = /^\/patient\/\d+$/.test(location.pathname);
   const isRequestsPage = /^\/patient\/\d+\/requests$/.test(location.pathname);
+  const backButtonActive = !isHome && !(isAuthenticated && isPatientPage);
+  const backButtonHref = isAuthenticated ? `/patient/${patientId}` : "/";
+  const backButtonLabel = isAuthenticated ? "Back to Dashboard" : "Back to Homepage";
 
   return (
     <nav className="navbar">
@@ -70,29 +87,21 @@ function Navbar() {
         </Link>
         )}
 
+        <Link
+          to={backButtonHref}
+          className={`back-button ${!backButtonActive ? "back-button--hidden" : ""}`}
+          tabIndex={backButtonActive ? 0 : -1}
+          aria-hidden={!backButtonActive}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {backButtonLabel}
+        </Link>
         <Link to="/how-it-works" onClick={() => setIsMenuOpen(false)}>How it Works</Link>
         <Link to="/clinics" onClick={() => setIsMenuOpen(false)}>Clinics</Link>
         <Link to="/resources" onClick={() => setIsMenuOpen(false)}>Resources</Link>
         <Link to="/support" onClick={() => setIsMenuOpen(false)}>Support</Link>
-        {!isHome && (
-          isAuthenticated ? (
-            <>
-              {patientId && !isPatientPage && (
-                <Link
-                  to={`/patient/${patientId}`}
-                  className="back-button"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Back to Dashboard
-                </Link>
-              )}
-              <button className="logout-button" onClick={handleLogout}>Logout</button>
-            </>
-          ) : (
-            <Link to="/" className="back-button" onClick={() => setIsMenuOpen(false)}>
-              Back to Homepage
-            </Link>
-          )
+        {!isHome && isAuthenticated && (
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
         )}
       </div>
     </nav>

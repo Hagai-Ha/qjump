@@ -12,6 +12,7 @@
     font-size: 1.3rem;
     color: inherit;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .nav-toggle {
@@ -101,10 +102,17 @@
     border: 1px solid #ddd;
     color: #333;
     font-weight: 500;
+    white-space: nowrap;
+    min-width: 130px;
+    box-sizing: border-box;
 }
 
 .back-button:hover {
     background-color: #e6e6e6;
+}
+
+.back-button--hidden {
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -132,6 +140,12 @@
 
     .nav-links .logout-button {
         margin-top: 0;
+    }
+
+    .back-button--hidden {
+        display: inline-block;
+        visibility: hidden;
+        pointer-events: none;
     }
 }
 

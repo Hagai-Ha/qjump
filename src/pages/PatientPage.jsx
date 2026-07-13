@@ -5,8 +5,6 @@ import AppointmentCard from '../components/AppointmentCard';
 import PostponeModal from '../components/PostponeModal';
 import PrecedeModal from '../components/PrecedeModal';
 import { useEffect } from 'react';
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useParams } from 'react-router-dom';
 import { Container, Title, Stack, Loader, Center, Text, Paper } from '@mantine/core';
 const PatientPage = () => {
@@ -15,8 +13,6 @@ const PatientPage = () => {
         appointmentStore.fetchPatientAppointments(patientId);
     }, [patientId]);
     return (
-        <div className="page">
-        <Navbar />
         <Container size="sm" py="xl">
             {/* Header Section */}
             <Paper p="md" mb="lg" radius="md" bg="blue.0">
@@ -55,8 +51,6 @@ const PatientPage = () => {
             <PostponeModal />
             <PrecedeModal />
         </Container>
-        <Footer />
-        </div>
     );
 }
 export default observer(PatientPage);

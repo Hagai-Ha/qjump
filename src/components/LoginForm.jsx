@@ -11,6 +11,7 @@ const LoginForm = observer(() => {
     e.preventDefault();
     const patientId = await authStore.login();
     if (patientId) {
+      localStorage.setItem("qjump_patientId", patientId);
       navigate(`/patient/${patientId}`);
     }
   };

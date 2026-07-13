@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { Container, Title, Text, Stack, Paper, Group, ThemeIcon } from "@mantine/core";
 
 const steps = [
@@ -28,9 +26,7 @@ const steps = [
 
 function HowItWorks() {
   return (
-    <div className="page">
-      <Navbar />
-      <Container size="sm" py="xl">
+    <Container size="sm" py="xl">
         <Title order={1} ta="center" mb="xs">
           How It Works
         </Title>
@@ -55,9 +51,7 @@ function HowItWorks() {
             </Paper>
           ))}
         </Stack>
-      </Container>
-      <Footer />
-    </div>
+    </Container>
   );
 }
 
