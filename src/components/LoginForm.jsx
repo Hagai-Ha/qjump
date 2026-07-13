@@ -34,7 +34,14 @@ const LoginForm = observer(() => {
         required
       />
       <button className="login-section__button" disabled={authStore.loading}>
-        {authStore.loading ? "Login..." : "Log In with HMO"}
+        {authStore.loading ? (
+          <>
+            <span className="spinner" aria-hidden="true" />
+            Logging in...
+          </>
+        ) : (
+          "Log In with HMO"
+        )}
       </button>
     </form>
   );

@@ -14,12 +14,12 @@ function Homepage() {
       <div className="features-container">
         <FeatureCard
           icon="📅"
-          title="Request Precede"
+          title="Reschedule Earlier"
           description="Precede your appointments"
         />
         <FeatureCard
           icon="✉️"
-          title="Request Postpone"
+          title="Reschedule Later"
           description="Postpone your appointments"
         />
       </div>
