@@ -6,14 +6,30 @@ class AuthStore {
   password = "";
   loading = false;
   errorMessage = "";
-
+  user=null; //added for tracking the authenticated user
   constructor() {
     makeAutoObservable(this);
+    this.initializeAuth();
   }
 
   setEmail = (val) => (this.email = val);
   setPassword = (val) => (this.password = val);
+  //this function initializes the authentication state by checking
+  //   if there's an existing session and setting up a listener for auth state changes.
+  //It ensures that the user state is always in sync with Supabase's auth state.
+  async initializeAuth() {
+    const { data: { session } } = await supabase.auth.getSession();
+    runInAction(() => {
+      this.user = session?.user || null;
+    });
 
+    // Listen to changes (login / logout events)
+    supabase.auth.onAuthStateChange((_event, session) => {
+      runInAction(() => {
+        this.user = session?.user || null;// Update the user state based on the session
+      });
+    });
+  }
   async login() {
     runInAction(() => {
       this.loading = true;
@@ -37,6 +53,7 @@ class AuthStore {
       if (userError) throw userError;
 
       runInAction(() => {
+        this.user = authData.user;// Update the user state with the authenticated user
         this.loading = false;
       });
 
