@@ -1,8 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
-import { authStore } from "../stores/AuthStore"; 
-import "./LoginForm.css"; 
+import { Loader } from "@mantine/core";
+import { authStore } from "../stores/AuthStore";
+import "./LoginForm.css";
 
 const LoginForm = observer(() => { 
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const LoginForm = observer(() => {
       <button className="login-section__button" disabled={authStore.loading}>
         {authStore.loading ? (
           <>
-            <span className="spinner" aria-hidden="true" />
+            <Loader size="sm" type="dots" color="white" />
             Logging in...
           </>
         ) : (
