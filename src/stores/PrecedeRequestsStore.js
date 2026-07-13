@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction} from "mobx";
 import { supabase } from "../data/supabaseClient";
 
-class PostponeRequestsStore {
+class PrecedeRequestsStore {
     requests = [];
     loading = false;
     
@@ -16,7 +16,7 @@ class PostponeRequestsStore {
         try{
             const parsedPatientId = parseInt(patient_id, 10);
             const { data, error } = await supabase
-                .from('postpone_requests')
+                .from('precede_requests')
                 .select('*')
                 .eq('patient_id', parsedPatientId);
             
@@ -25,7 +25,7 @@ class PostponeRequestsStore {
                 this.requests = data || [];
             });
         }catch(err){
-            console.error("Error fetching postpone requests:", err);
+            console.error("Error fetching precede requests:", err);
         }finally{
             runInAction(() => {
                 this.loading = false;
@@ -37,7 +37,7 @@ class PostponeRequestsStore {
         try {
             // 1. Delete from the Supabase table
             const { error } = await supabase
-                .from('postpone_requests')
+                .from('precede_requests')
                 .delete()
                 .eq('request_id', request_id);
 
@@ -50,9 +50,9 @@ class PostponeRequestsStore {
             
             console.log(`Successfully deleted request #${request_id}`);
         } catch (err) {
-            console.error("Error deleting postpone request:", err);
+            console.error("Error deleting precede request:", err);
         }
     }
     
 }
-export const postponeRequestsStore = new PostponeRequestsStore();
+export const precedeRequestsStore = new PrecedeRequestsStore();
