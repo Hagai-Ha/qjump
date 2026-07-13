@@ -53,6 +53,7 @@ const RequestsPage = () => {
                             <RequestCard 
                                 key={request.request_id} 
                                 request={request} 
+                                type="postpone"
                             />
                         ))
                     )}
@@ -94,6 +95,7 @@ const RequestsPage = () => {
                             <RequestCard 
                                 key={request.request_id} 
                                 request={request} 
+                                type="precede"
                             />
                         ))
                     )}

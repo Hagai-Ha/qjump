@@ -1,6 +1,7 @@
 import { observer, inject } from 'mobx-react'
 import {Component} from 'react'
 import {postponeRequestsStore} from '../stores/PostponeRequestsStore'
+import { precedeRequestsStore } from '../stores/PrecedeRequestsStore';
 import { Card, Text, Button, Group, Stack, Badge, Flex} from '@mantine/core';
 class RequestCard extends Component {
     render() {
@@ -20,7 +21,17 @@ class RequestCard extends Component {
         };
 
 
-        const { request } = this.props;
+        const { request, type } = this.props;
+
+        // Determine which store action to call based on the 'type' prop
+        const handleDelete = () => {
+            if (type === 'precede') {
+                precedeRequestsStore.deletePatientRequest(request.request_id);
+            } else {
+                postponeRequestsStore.deletePatientRequest(request.request_id);
+            }
+        };
+
         const formattedStartDate = formatDate(request.start_date);
         const formattedEndDate = formatDate(request.end_date);
         const submittedAt = formatSubmittedAt(request.created_at);
@@ -74,7 +85,7 @@ class RequestCard extends Component {
                             variant="light" 
                             color="red" 
                             fullWidth
-                            onClick={() => postponeRequestsStore.deletePatientRequest(request.request_id)}
+                            onClick={handleDelete}
                         >
                             ❌ Delete request
                         </Button>
