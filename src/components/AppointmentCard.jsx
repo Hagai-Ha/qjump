@@ -7,11 +7,9 @@ class AppointmentCard extends Component {
         //add date with slashes and revert it to be dd/mm/yyyy
         const dateWithSlash = this.props.appointment.date.replace(/-/g, '/');
         const [year, month, day] = dateWithSlash.split('/');
-        //add a calander emoji
-        const formattedDate = `📅 ${day}/${month}/${year}`
+        const formattedDate = ` ${day}/${month}/${year}`
         const timeWithoutSeconds = this.props.appointment.time.split(':').slice(0, 2).join(':');
-        //add a clock emoji to the time
-        const formattedTime = `⏰ ${timeWithoutSeconds}`;
+        const formattedTime = ` ${timeWithoutSeconds}`;
         const { appointment } = this.props;
         return (
             <Card shadow="sm" padding="lg" radius="md" withBorder style={{ width: '100%' }}>
@@ -32,13 +30,13 @@ class AppointmentCard extends Component {
                         </Group>
 
                         <Text size="sm" c="Black">
-                            <strong>Date:</strong> {formattedDate}
+                            <strong>📅 Date:</strong> {formattedDate}
                         </Text>
                         <Text size="sm" c="Black">
-                            <strong>Time:</strong> {formattedTime}
+                            <strong>⏰ Time:</strong> {formattedTime}
                         </Text>
                         <Text size="sm" c="Black">
-                            <strong>Location:</strong> {`📍 ${appointment.location}`}
+                            <strong>📍 Location:</strong> {appointment.location}
                         </Text>
                     </Stack>
 
