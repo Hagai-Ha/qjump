@@ -3,7 +3,7 @@ import "./Footer.css";
 function Footer() {
   return (
     <footer className="footer-legal">
-      Legal Information © 2022-2022 - Tenvaos Blods, Inc. All rights reserved.
+      Qjump © 2026 - All rights reserved.
     </footer>
   );
 }
